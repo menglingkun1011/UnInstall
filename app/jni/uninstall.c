@@ -35,14 +35,12 @@
 #define LOG_WARN(tag, msg) __android_log_write(ANDROID_LOG_WARN, tag, msg)
 #define LOG_ERROR(tag, msg) __android_log_write(ANDROID_LOG_ERROR, tag, msg)
 
-
 /* 内全局变量begin */
 static char c_TAG[] = "onEvent";
 static jboolean b_IS_COPY = JNI_TRUE;
 
 jstring
-Java_com_meng_test_MainActivity_init( JNIEnv* env,
-                                                 jobject thiz )
+Java_com_meng_test_MainActivity_init( JNIEnv* env, jobject thiz ,jstring url)
 {
     jstring tag = (*env)->NewStringUTF(env, c_TAG);
 
@@ -105,9 +103,8 @@ Java_com_meng_test_MainActivity_init( JNIEnv* env,
         //执行命令am start -a android.intent.action.VIEW -d http://shouji.360.cn/web/uninstall/uninstall.html
        // execlp("am", "am", "start", "-a", "android.intent.action.VIEW", "-d", "http://shouji.360.cn/web/uninstall/uninstall.html", (char *)NULL);
         //4.2以上的系统由于用户权限管理更严格，需要加上 --user 0
-//       execlp("am", "am", "start","--user", "0" ,"-a", "android.intent.action.VIEW", "-d", "https://www.baidu.com", (char *)NULL);
-//      am broadcast -a android.net.conn.CONNECTIVITY_CHANGE
-       execlp("am", "am", "broadcast","--user", "0" ,"-a", "android.intent.action.VIEW", "-d", "https://www.baidu.com", (char *)NULL);
+
+       execlp("am", "am", "start","--user", "0" ,"-a", "android.intent.action.VIEW", "-d", (*env)->GetStringUTFChars(env, url, NULL), (char *)NULL);
 
     }
     else

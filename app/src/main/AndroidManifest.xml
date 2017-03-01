@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.meng.test">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -19,7 +19,12 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".SDCardListenSer"/>
+        <service android:name=".SDCardListenSer" />
+
+        <activity android:name=".SecondActivity"
+            android:theme="@style/MyTheme"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
